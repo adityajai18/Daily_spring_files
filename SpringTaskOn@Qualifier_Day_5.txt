@@ -1,0 +1,154 @@
+🧩 Task 1 — Payment System (Multiple Payment Gateways)
+
+🎯 Objective:
+Demonstrate @Qualifier to select between multiple implementations of a PaymentService interface (e.g., Paytm, GooglePay, PhonePe).
+
+🧱 Class-wise Design
+
+1️.Interface — PaymentService
+Method:
+
+void pay(double amount)
+
+2️.Class — PaytmPaymentService
+Implements PaymentService
+Method:
+
+Print: "Paid ₹<amount> using Paytm"
+
+3️. Class — GooglePayService
+Implements PaymentService
+Method:
+
+Print: "Paid ₹<amount> using GooglePay"
+
+4️. Class — PaymentProcessor
+Field:
+
+PaymentService paymentService
+
+Injection:
+
+Use @Autowired and @Qualifier("googlePayService")
+
+Method:
+
+processPayment(double amount) → delegate to injected service
+
+5️.AppConfig Class
+
+@Configuration, @ComponentScan("com.example")
+
+6️. MainApp Class
+
+Load context
+
+Get PaymentProcessor bean
+
+Call processPayment(2500.0)
+
+📘 Expected Output:
+
+Paid ₹2500.0 using GooglePay
+========================================================================================================
+🧩 Task 2 — Vehicle Engine Selection System
+
+🎯 Objective:
+Demonstrate @Qualifier to inject a specific engine type (Diesel / Electric / Petrol) into a Vehicle class.
+
+🧱 Class-wise Design
+
+1. Interface — Engine
+Method:
+
+void start();
+
+2️.Implementations:
+
+DieselEngine: prints "Diesel engine started 🚛"
+
+ElectricEngine: prints "Electric engine started ⚡"
+
+PetrolEngine: prints "Petrol engine started 🚗"
+
+3️. Class — Vehicle
+Field:
+
+Engine engine
+
+Injection:
+
+@Autowired
+
+@Qualifier("electricEngine")
+
+Method:
+
+startVehicle() → call engine.start()
+
+4️. AppConfig Class
+
+@Configuration, @ComponentScan("com.example")
+
+5️.MainApp Class
+
+Load context
+
+Get Vehicle bean
+
+Call startVehicle()
+
+📘 Expected Output:
+
+Electric engine started ⚡
+==================================================================================================================
+🧩 Task 3 — Notification Sender System
+
+🎯 Objective:
+Use @Qualifier to decide which notification channel (Email / SMS / WhatsApp) should be used by a NotificationService.
+
+🧱 Class-wise Design
+
+1️. Interface — MessageService
+Method:
+
+void send(String message)
+
+2️. Implementations:
+
+EmailService: prints "Email sent: <message>"
+
+SmsService: prints "SMS sent: <message>"
+
+WhatsAppService: prints "WhatsApp sent: <message>"
+
+3️. Class — NotificationService
+Field:
+
+MessageService messageService
+
+Injection:
+
+@Autowired
+
+@Qualifier("whatsAppService")
+
+Method:
+
+notifyUser(String msg) → calls messageService.send(msg)
+
+4️. AppConfig Class
+
+@Configuration, @ComponentScan("com.example")
+
+5️. MainApp Class
+
+Load context
+
+Get NotificationService bean
+
+Call notifyUser("Meeting at 4 PM")
+
+📘 Expected Output:
+
+WhatsApp sent: Meeting at 4 PM

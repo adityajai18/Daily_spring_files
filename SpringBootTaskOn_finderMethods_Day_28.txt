@@ -1,0 +1,93 @@
+Task 1: Student Management System
+
+Objective
+Apply finder methods on student data with multiple filters.
+
+Entity Class: Student
+
+Fields:
+
+id (Long)
+name (String)
+course (String)
+marks (Double)
+grade (String)
+city (String)
+passed (Boolean)
+
+Repository Interface: StudentRepository
+
+Finder Methods:
+findByCourse(String course)
+findByMarksGreaterThan(Double marks)
+findByMarksBetween(Double min, Double max)
+findByGrade(String grade)
+findByCity(String city)
+findByPassedTrue()
+findByNameStartingWith(String prefix)
+findByCourseAndPassed(String course, Boolean status)
+findTop3ByOrderByMarksDesc()
+findByCityNotIn(List<String> cities)
+
+Service Logic
+Get top scorers
+Filter students who passed
+Search students by name
+Get students from specific cities
+
+Runner Logic
+Insert sample student records
+Execute all finder methods
+Display results clearly
+
+Task 2: Order Management System
+
+Objective
+Use finder methods for real-time order filtering and reporting.
+
+
+Entity Class: Order
+
+Fields:
+
+id (Long)
+customerName (String)
+productName (String)
+amount (Double)
+orderDate (LocalDate)
+status (String) (Placed, Shipped, Delivered)
+
+Repository Interface: OrderRepository
+
+Finder Methods:
+findByCustomerName(String name)
+findByStatus(String status)
+findByAmountGreaterThan(Double amount)
+findByAmountBetween(Double min, Double max)
+findByOrderDateAfter(LocalDate date)
+findByOrderDateBetween(LocalDate start, LocalDate end)
+findByStatusAndAmountGreaterThan(String status, Double amount)
+findByProductNameContaining(String keyword)
+findTop5ByOrderByOrderDateDesc()
+findByStatusIn(List<String> statusList)
+
+Service Logic
+Get recent orders
+Filter high-value orders
+Track orders by status
+Search orders by product name
+
+Runner Logic
+Insert order data
+Execute all finder methods
+Print reports
+
+Pro Tip (Important)
+--------------------
+While practicing these tasks, focus on:
+
+Method naming rules (VERY important)
+Combining conditions (And, Or)
+Sorting (OrderBy)
+Limiting results (Top, First)
+Collections (In, NotIn)

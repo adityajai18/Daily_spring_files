@@ -1,0 +1,181 @@
+package com.nit.controller;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import com.nit.entity.Product;
+import com.nit.service.ProductService;
+@Controller
+public class ProductController {
+
+//	addProduct(Product product): Method for handling the addition of a new product.
+//	retrieveAllProducts(): Method for handling the retrieval of all products.
+//	deleteProduct(int productId): Method for handling the deletion of a product.
+//	updateProduct(Product product): Method for handling the update of a product.
+
+	@Autowired
+	ProductService productService;
+	public String saveProduct(Product product)
+	{
+		return productService.addProduct(product);
+	}
+	public List<Product> retrieveAllProducts()
+	{
+		return productService.retrieveAllProducts();
+	}
+}
+
+--------------------------------------------------------------------------------
+
+package com.nit.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.nit.entity.Product;
+import com.nit.repository.ProductDAO;
+@Service
+public class ProductService {
+
+	
+//	addProduct(Product product): Method to add a new product.
+//	List<Product> retrieveAllProducts(): Method to retrieve all products.
+//	deleteProduct(int productId): Method to delete a product.
+//	updateProduct(Product product): Method to update an existing product.
+
+	@Autowired
+	ProductDAO dao;
+	public String addProduct(Product product)
+	{
+		return dao.insertProduct(product);
+	}
+	public List<Product> retrieveAllProducts()
+	{
+		return dao.getAllProducts();
+	}
+}
+----------------------------------------------------------------------------------
+
+package com.nit.repository;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.nit.entity.Product;
+@Repository
+public class ProductDAO {
+
+	@Autowired
+	DataSource dataSource;
+//	insertProduct(Product product): Method to insert a new product record into the database.
+//	List<Product> getAllProducts(): Method to retrieve all product records from the database.
+//	deleteProduct(int productId): Method to delete a product by its ID.
+//	updateProduct(Product product): Method to update an existing product.
+
+	public String insertProduct(Product product)
+	{
+		String str=null;
+		try {
+			Connection con = dataSource.getConnection();
+		    PreparedStatement ps=con.prepareStatement("insert into product51 values(?,?,?,?)");
+		    ps.setInt(1, product.getProductId());
+		    ps.setString(2, product.getProductName());
+		    ps.setString(3, product.getDescription());
+		    ps.setDouble(4, product.getPrice());
+		    int executeUpdate = ps.executeUpdate();
+		    if(executeUpdate>0)
+		    {
+		    	str="Product Inserted SuccessFully With Product Id:"+product.getProductId();
+		    }
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return str;
+	}
+	public List<Product> getAllProducts()
+	{
+		List<Product> list=new ArrayList<Product>();
+		try {
+			Connection con = dataSource.getConnection();
+		    PreparedStatement ps=con.prepareStatement("select * from product51");
+		    ResultSet rs = ps.executeQuery();
+		    while(rs.next())
+		    {
+		    	list.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4)));
+		    }
+		    
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+}
+--------------------------------------------------------------------------------------
+package com.nit;
+
+import java.util.List;
+import java.util.Scanner;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+import com.nit.controller.ProductController;
+import com.nit.entity.Product;
+
+@SpringBootApplication
+public class ProductMsApplication {
+
+	public static void main(String[] args) {
+		ApplicationContext context = SpringApplication.run(ProductMsApplication.class, args);
+        ProductController bean = context.getBean(ProductController.class);
+		//		Create a class named ProductManagementApp:
+//			Use the Scanner class to take user input for product details.
+//			Implement options to:
+//			Insert a new product.
+//			Retrieve all products.
+//			Delete a product by ID.
+//			Update product details.
+		Scanner sc=new Scanner(System.in);
+		System.out.println
+		("1.Insert a new product\n2.Retrieve all products\n3.Delete a product by ID\n4.Update product details");
+         int option=Integer.parseInt(sc.nextLine());
+         switch(option)
+         {
+         case 1:System.out.println("U r Going 2 Insert Product Info");
+         System.out.println("Enter ProductId:");
+         int pId=Integer.parseInt(sc.nextLine());
+         System.out.println("Enter Product Name:");
+         String pName=sc.nextLine();
+         System.out.println("Enter Product Description");
+         String pDesc=sc.nextLine();
+         System.out.println("Enter Product Price");
+         double price=sc.nextDouble();
+         String saveProduct = bean.saveProduct(new Product(pId, pName, pDesc, price));
+         System.out.println(saveProduct);
+         break;
+         case 2:System.out.println("Products Available in Your Stock");
+         List<Product> allProducts = bean.retrieveAllProducts();
+         allProducts.forEach(System.out::println);
+         }
+	}
+
+}
+-----------------------------------------------------------------------------------------
+spring.application.name=ProductMS
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+spring.datasource.url=jdbc:oracle:thin:@localhost:1521:orcl
+spring.datasource.username=ekata
+spring.datasource.password=123
+

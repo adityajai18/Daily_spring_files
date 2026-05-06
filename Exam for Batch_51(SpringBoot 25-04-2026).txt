@@ -1,0 +1,47 @@
+Ques 01: Employee and ID Card Management System
+
+Project Overview
+----------------
+Develop a Spring Boot application to manage employee records where each employee has exactly one ID card using @OneToOne mapping.
+
+Requirements
+
+The application should store employee details such as employeeId, employeeName, department, salary, 
+along with ID card details like cardNumber, cardType, accessLevel, and issuedBy.
+
+Each employee should have only one ID card associated with them.
+
+Operations:
+-----------
+Add employee with ID card details
+View employee and ID card information
+Search employee by ID
+
+Flow
+User enters employee and ID card information
+Data is saved using one-to-one mapping
+Employee details with ID card are retrieved and displayed
+
+Ques 02: Course and Students Enrollment System
+
+Project Overview
+----------------
+Develop a Spring Boot application to manage courses and enrolled students using @OneToMany mapping.
+
+Requirements
+
+The application should store course details such as courseId, courseName, duration, and student details such as studentId, studentName, email, grade.
+
+One course can have multiple students, while each student belongs to one course.
+
+Operations:
+-----------
+Add course with multiple students
+View all students enrolled in a course
+Search course by ID with student list
+
+Flow
+User enters course details
+Multiple students are added under the course
+Data is saved using one-to-many mapping
+Course and associated student details are displayed

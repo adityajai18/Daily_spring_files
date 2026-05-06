@@ -1,0 +1,232 @@
+Task 1 — Employee Salary & Bonus Calculation System
+
+Objective
+
+To read employee details from application.properties using @Value and calculate the yearly salary including bonus.
+
+Description
+
+In many organizations, employee salary details are stored in configuration files.
+This task helps you understand how to inject those values into a Spring Boot application and perform calculations using them.
+
+The system should:
+
+Read employee ID, name, monthly salary, and bonus
+
+Calculate yearly salary using logic:
+
+yearly salary = (monthly salary × 12) + bonus
+
+Display all details in a formatted way
+
+Input (application.properties)
+
+Employee Name
+
+Employee ID
+
+Monthly Salary
+
+Bonus Amount
+
+Processing Logic
+
+Inject values using @Value
+
+Perform arithmetic calculation for yearly salary
+
+Store result in a variable
+
+Expected Output
+----------------
+Employee details
+
+Monthly salary
+
+Bonus
+
+Final yearly salary
+
+Task 2 — Online Shopping Discount System
+
+Objective
+
+To calculate final product price after applying discount using @Value and SpEL.
+
+Description
+
+In e-commerce applications, product price and discount percentage are often stored in configuration files. This task demonstrates how to dynamically calculate the discounted price using Spring Expression Language (SpEL).
+
+The system should:
+
+Read product name, price, and discount percentage
+
+Apply discount formula
+
+final price = price - (price × discount / 100)
+
+Display original and final price
+
+Input
+
+Product Name
+
+Original Price
+
+Discount Percentage
+
+Processing Logic
+
+Inject values using @Value
+
+Use SpEL expression inside @Value for calculation
+
+Store computed final price
+
+Expected Output
+
+Product name
+
+Original price
+
+Discount percentage
+
+Final discounted price
+
+Task 3 — Student Result Evaluation System
+
+Objective
+
+To evaluate student performance using marks from properties file.
+
+Description
+
+Educational systems often calculate results based on marks stored in configuration or database. This task helps you use @Value to read marks and compute total, average, and pass/fail status.
+
+The system should:
+
+Read marks for multiple subjects
+
+Calculate total and average
+
+Determine result using condition:
+
+PASS if all subjects ≥ 35
+
+FAIL otherwise
+
+Input
+
+Student Name
+
+Marks (Math, Science, English)
+
+Processing Logic
+
+Inject marks using @Value
+
+Use SpEL for:
+
+Total calculation
+
+Average calculation
+
+Conditional result (PASS/FAIL)
+
+Expected Output
+
+Student details
+
+Marks in each subject
+
+Total marks
+
+Average marks
+
+Result status
+
+Task 4 — Library Fine Calculation System
+
+Objective
+
+To calculate late return fine using configuration values.
+
+Description
+
+Library systems impose fines when books are returned late. This task simulates such a system using @Value.
+
+The system should:
+
+Read number of late days and fine per day
+
+Calculate total fine
+
+total fine = late days × fine per day
+
+Display fine details
+
+Input
+
+Book Name
+
+Number of Late Days
+
+Fine per Day
+
+Processing Logic
+
+Inject values using @Value
+
+Use SpEL or normal multiplication
+
+Compute total fine
+
+Expected Output
+
+Book name
+
+Late days
+
+Fine per day
+
+Total fine amount
+
+Task 5 — User Login Validation System
+
+Objective
+
+To validate user credentials using values from properties file.
+
+Description
+
+Login systems often store default credentials in configuration for testing or admin access. This task demonstrates how to compare user input with injected values.
+
+The system should:
+
+Read username and password from properties
+
+Accept user input from console
+
+Validate credentials
+
+Display success or failure message
+
+📥 Input
+
+Username (from properties + user input)
+
+Password (from properties + user input)
+
+⚙Processing Logic
+
+Inject stored credentials using @Value
+
+Read user input using Scanner
+
+Compare both values using condition
+
+📤 Expected Output
+
+If correct → "Login Successful"
+
+If incorrect → "Invalid Credentials"

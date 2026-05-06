@@ -1,0 +1,68 @@
+
+
+Question01: Discount Calculation System
+
+Objective:Apply different discount strategies using @Profile.
+
+Profiles & Logic:
+-----------------
+dev → NoDiscountService
+Return original price
+
+test → FixedDiscountService
+Apply fixed discount (e.g., ₹100 off)
+
+prod → PercentageDiscountService
+Apply percentage discount (10% discount)
+
+Additional Requirements:
+-------------------------
+Validate price (should be positive)
+Ensure discount does not exceed total price
+Display final price after discount
+Show applied discount type
+
+
+Question02:Application Settings System
+
+Objective:Bind multiple types (simple + list + map).
+
+Properties:
+app.name
+app.version
+app.supportedLanguages (List)
+app.metadata (Map)
+Requirements:
+-------------
+Create AppConfig class
+Bind all property types using prefix app
+Display all configuration values
+
+Additional Logic:
+-----------------
+Show number of supported languages
+Print metadata details clearly
+
+Question03:Bank Account Management System
+
+Objective:Handle bank accounts using CrudRepository.
+
+Fields:
+accountId
+accountHolderName
+balance
+accountType
+
+Operations Logic:
+
+Create account → save()
+Display accounts → findAll()
+Update balance → save()
+Delete account → deleteById()
+Find by ID → findById()
+
+Service Layer Logic:
+------------------------
+Prevent negative balance
+Validate account existence
+Display total accounts → count()

@@ -1,0 +1,191 @@
+
+package com.nit.sbeans;
+public class Project {
+
+	private int projectId;
+	private String projectName;
+	private String duration;
+	public Project(int projectId, String projectName, String duration) {
+		super();
+		this.projectId = projectId;
+		this.projectName = projectName;
+		this.duration = duration;
+	}
+	public void showProjectDetails()
+	{
+      System.out.println("Project Id:"+projectId+" Project Name:"+projectName+"  "+duration);
+	}
+}
+--------------------------------
+package com.nit.sbeans;
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class Employee {
+
+	private int employeeId;
+	private String employeeName;
+	private Project project;
+	public Employee(int employeeId, String employeeName) {
+		super();
+		this.employeeId = employeeId;
+		this.employeeName = employeeName;
+	}
+
+	public void setProject(Project project) {
+		this.project = project;
+	}
+	public void showEmployeeDetails()
+	{
+		System.out.println("Employee Id:"+employeeId+" Employee Name:"+employeeName);
+        project.showProjectDetails();
+	}
+}
+------------------------------------
+package com.nit.sbeans;
+
+import java.util.List;
+
+public class Department {
+
+	private String departmentName;
+	private List<Employee> employees;
+	public Department(String departmentName, List<Employee> employees) {
+		super();
+		this.departmentName = departmentName;
+		this.employees = employees;
+	}
+	public void showDepartmentInfo()
+	{
+		System.out.println("Department Name:"+departmentName);
+	    for(Employee emp:employees)
+	    	emp.showEmployeeDetails();
+	}
+}
+------------------------------------------
+package com.nit.sbeans;
+
+import java.util.List;
+
+public class Department {
+
+	private String departmentName;
+	private List<Employee> employees;
+	public Department(String departmentName, List<Employee> employees) {
+		super();
+		this.departmentName = departmentName;
+		this.employees = employees;
+	}
+	public void showDepartmentInfo()
+	{
+		System.out.println("Department Name:"+departmentName);
+	    for(Employee emp:employees)
+	    	emp.showEmployeeDetails();
+	}
+}
+--------------------------------------------
+package com.nit.sbeans;
+
+import java.util.Map;
+
+public class Company {
+
+	private String companyName;
+	private Map<String, Department> departments;
+	public Company(String companyName, Map<String, Department> departments) {
+		super();
+		this.companyName = companyName;
+		this.departments = departments;
+	}
+    public void showCompanyInfo()
+    {
+    	System.out.println("Company Name:"+companyName);
+    	departments.forEach((d1,d2)->
+    	{
+    		System.out.println(d1);
+    	    d2.showDepartmentInfo();
+    	});
+    }
+}
+-----------------------------------------------
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Component scan -->
+	<context:component-scan
+		base-package="com.nit.sbeans" />
+	<bean id="project1" class="com.nit.sbeans.Project">
+	<constructor-arg name="projectId" value="101"></constructor-arg>
+	<constructor-arg name="projectName" value="Web Application"></constructor-arg>
+	<constructor-arg name="duration" value="6 months"></constructor-arg>
+	</bean>
+	
+	<bean id="project2" class="com.nit.sbeans.Project">
+	<constructor-arg name="projectId" value="102"></constructor-arg>
+	<constructor-arg name="projectName" value="Enterprise Application"></constructor-arg>
+	<constructor-arg name="duration" value="9 months"></constructor-arg>
+	</bean>
+	
+	<bean id="project3" class="com.nit.sbeans.Project">
+	<constructor-arg name="projectId" value="103"></constructor-arg>
+	<constructor-arg name="projectName" value="Mobile Application"></constructor-arg>
+	<constructor-arg name="duration" value="8 months"></constructor-arg>
+	</bean>
+	
+	<bean id="emp1" class="com.nit.sbeans.Employee">
+	<constructor-arg name="employeeId" value="123"></constructor-arg>
+	<constructor-arg name="employeeName" value="Rajat"></constructor-arg>
+	<property name="project" ref="project1"></property>
+	</bean>
+	
+	<bean id="emp2" class="com.nit.sbeans.Employee">
+	<constructor-arg name="employeeId" value="124"></constructor-arg>
+	<constructor-arg name="employeeName" value="Rohit"></constructor-arg>
+	<property name="project" ref="project2"></property>
+	</bean>
+	<bean id="emp3" class="com.nit.sbeans.Employee">
+	<constructor-arg name="employeeId" value="125"></constructor-arg>
+	<constructor-arg name="employeeName" value="Amit"></constructor-arg>
+	<property name="project" ref="project3"></property>
+	</bean>
+	
+	<bean id="dept" class="com.nit.sbeans.Department">
+	<constructor-arg name="departmentName" value="IT"></constructor-arg>
+	<constructor-arg name="employees">
+	<list>
+	<ref bean="emp1"/>
+	<ref bean="emp2"/>
+	<ref bean="emp3"/>
+	</list>
+	</constructor-arg>
+	</bean>
+	
+	<bean id="company" class="com.nit.sbeans.Company">
+	<constructor-arg name="companyName" value="TechWave Solutions"></constructor-arg>
+	<constructor-arg name="departments">
+	<map>
+	<entry key="HR" value-ref="dept"></entry>
+	
+	</map>
+	</constructor-arg>
+	</bean>
+</beans>
+--------------------------------------
+package com.nit;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.nit.sbeans.Company;
+
+public class App {
+    public static void main(String[] args) {
+      ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext("com\\nit\\config\\applicationContext.xml"); 
+      Company company = ctx.getBean(Company.class);
+      company.showCompanyInfo();
+    }
+}

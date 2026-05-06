@@ -1,0 +1,103 @@
+
+
+Task01. Spring Boot Data JPA Task: Employee Paging and Sorting
+🎯 Objective
+
+Build a Spring Boot application using Spring Data JPA that:
+
+Stores Employee records in a database.
+
+Provides functionality to fetch records with pagination and sorting.
+
+Prints paginated results in the console.
+
+🛠 Task Requirements
+1️.Main Application Class
+
+Use @SpringBootApplication.
+
+Implement CommandLineRunner to test paging and sorting functionality.
+
+2️.Employee Entity
+
+Table: employees
+
+Fields:
+
+id (Long, Primary Key)
+
+name (String)
+
+designation (String)
+
+salary (Double)
+
+3️.EmployeeRepository
+
+Extend PagingAndSortingRepository<Employee, Long>.
+
+Supports built-in methods:
+
+findAll(Pageable pageable) → for pagination.
+
+findAll(Sort sort) → for sorting.
+
+4️.Paging Examples
+
+Fetch employees in pages of size 3.
+
+Print each page separately.
+
+5️.Sorting Examples
+
+Fetch all employees sorted by:
+
+Name (Ascending).
+
+Salary (Descending).
+
+
+Task02: Employee Search System (Finder Methods)
+Problem Statement
+
+You are developing an Employee Search System using Spring Boot and MongoDB.
+The system stores employee details and allows searching employees using Finder Methods.
+
+Requirements
+
+Entity: Employee (id, name, department, salary, joiningDate)
+
+Repository (Finder Methods):
+
+Find employees by department
+
+Find employees with salary greater than a given amount
+
+Find employees joined after a given date
+
+Find employees by name containing a keyword (case-insensitive)
+
+Runner: Insert sample data and execute all finder queries on startup.
+
+Task03: Product Catalog System (@Query Methods)
+Problem Statement
+
+You are designing a Product Catalog System for an e-commerce platform.
+The system allows searching and filtering products stored in MongoDB using @Query methods.
+
+Requirements
+
+Entity: Product (id, name, category, price, stock)
+
+Repository (@Query methods):
+
+Find products by category
+
+Find products with price less than a given value
+
+Find products with stock greater than 0 (available products)
+
+Find products by name containing a keyword (case-insensitive search)
+
+Runner: Insert sample products and run all queries on startup.
+

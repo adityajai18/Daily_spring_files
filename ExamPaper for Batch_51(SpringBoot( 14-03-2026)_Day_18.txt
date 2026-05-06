@@ -1,0 +1,10 @@
+Module Name :- Spring Core
+Batch :- JAVA 51
+Coding :- 02
+1.Spring Boot Layered Application using DataSource (CRUD)
+Develop a Spring Boot layered application to manage Employee records using DataSource configuration.
+Implement Controller, Service, Repository layers and perform CRUD operations.
+
+2.Spring Core Internationalization (I18N)
+Develop a Spring Core application to demonstrate Internationalization (I18N).
+Create message properties for English and French languages and display messages based on selected locale.

@@ -1,0 +1,131 @@
+
+
+
+messages_en.properties
+-----------------------
+date.message=Today''s date is: {0}
+
+messages_fr.properties
+-----------------------
+date.message=La date d'aujourd'hui est: {0}
+
+messages_hi.properties
+----------------------
+date.message=à¤à¤ à¤à¥ à¤¤à¤¾à¤°à¥à¤ à¤¹à¥: {0}
+
+messages_te.properties
+-----------------------
+date.message=à°à°°à±à°à± à°¤à±à°¦à±: {0}
+
+messages.properties
+----------------------
+date.message=Today''s date is: {0}
+
+
+--------------------------------------------------------
+package com.nit.sbeans;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+
+public class DateFormatterUtil {
+
+	 
+	public  static String formatDateForLocale(Locale locale, LocalDate date)
+	{
+		DateTimeFormatter ofPattern;
+		if(locale.getLanguage().equals("en"))
+		{
+	      ofPattern = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			
+		}
+		else if(locale.getLanguage().equals("hi"))
+		{
+		      ofPattern = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				
+			}
+		else if(locale.getLanguage().equals("te"))
+		{
+			ofPattern=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		}
+		else if(locale.getLanguage().equals("fr")) {
+			ofPattern=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		}
+		else {
+			ofPattern=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		}
+		return date.format(ofPattern);
+	}
+}
+-----------------------------------------------------------
+
+package com.nit.sbeans;
+
+import java.util.Locale;
+public class LocaleSelector {
+
+	public  static Locale getLocale(String lang)
+	{
+		if(lang.equalsIgnoreCase("hi")) 
+			return Locale.of("hi");
+			else if(lang.equalsIgnoreCase("en"))
+				return Locale.of("en");
+			else if(lang.equalsIgnoreCase("te"))
+				return Locale.of("te");
+			else if(lang.equalsIgnoreCase("fr"))
+				return Locale.of("fr");
+			else return Locale.ENGLISH;
+		
+	}
+}
+----------------------------------------------------------------
+
+package com.nit.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
+
+@Configuration
+public class AppConfig {
+
+	@Bean()
+	public ResourceBundleMessageSource messageSource()
+	{
+		ResourceBundleMessageSource source=new ResourceBundleMessageSource();
+		source.setBasename("com\\nit\\resources\\messages");
+		source.setDefaultEncoding("UTF-8");
+	    return source;
+	}
+}
+-------------------------------------------------------------------
+
+package com.nit;
+
+import java.time.LocalDate;
+import java.util.Locale;
+import java.util.Scanner;
+
+import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.nit.config.AppConfig;
+import com.nit.sbeans.DateFormatterUtil;
+import com.nit.sbeans.LocaleSelector;
+
+public class App {
+    public static void main(String[] args) {
+    AnnotationConfigApplicationContext ctx=new AnnotationConfigApplicationContext(AppConfig.class);
+    Scanner sc=new Scanner(System.in);
+    System.out.println("Enter locale (en, fr, hi, te):");
+    String lang=sc.nextLine();
+    Locale locale = LocaleSelector.getLocale(lang);
+    LocalDate now = LocalDate.now();
+    String formatted = DateFormatterUtil.formatDateForLocale(locale, now);
+    MessageSource ms = ctx.getBean(MessageSource.class);
+    String message = ms.getMessage("date.message", new Object[] {formatted},locale);
+    System.out.println(message);
+    sc.close();
+    }
+}

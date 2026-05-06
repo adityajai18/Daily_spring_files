@@ -1,0 +1,245 @@
+Task 1 — Student Details Binding System
+
+Classes Involved:
+
+Student
+
+StudentRunner (Main/Runner class)
+
+Student Class Fields:
+
+id
+
+name
+
+course
+
+fee
+
+Responsibility:
+
+Bind properties using prefix student
+
+Runner Class Responsibility:
+
+Fetch Student object
+
+Display student details
+
+Output:
+
+---- Student Details ----
+ID      : 101
+Name    : Rahat
+Course  : B.Tech
+Fee     : 75000
+
+Task 2 — Company Department List System
+
+Classes Involved:
+
+Company
+
+Department
+
+CompanyRunner
+
+Company Class Fields:
+
+List<Department> departments
+
+Department Class Fields:
+
+deptId
+
+deptName
+
+Responsibility:
+
+Bind list of departments
+
+Runner Class Responsibility:
+
+Iterate and display departments
+Output:
+---- Department List ----
+Dept ID : 101 | Dept Name : HR
+Dept ID : 102 | Dept Name : IT
+Dept ID : 103 | Dept Name : Finance
+
+Task 3 — Product Catalog System
+
+Classes Involved:
+
+Store
+
+Product
+
+StoreRunner
+
+Store Class Fields:
+
+List<Product> products
+
+Product Class Fields:
+
+id
+
+name
+
+price
+
+Responsibility:
+
+Bind product list
+
+Runner Class Responsibility:
+
+Display all products
+
+Output:
+
+---- Product List ----
+ID : 1 | Name : Laptop  | Price : 60000
+ID : 2 | Name : Mobile  | Price : 20000
+ID : 3 | Name : Tablet  | Price : 15000
+
+Task 4 — Bank Account Validation System
+
+Classes Involved:
+
+BankAccount
+
+BankRunner
+
+BankAccount Class Fields:
+
+accountNumber
+
+holderName
+
+balance
+
+Responsibility:
+
+Bind properties
+
+Validate balance > 0
+
+Runner Class Responsibility:
+
+Display account or error
+Valid Output:
+
+---- Bank Account Details ----
+Account No : 1234567890
+Name       : Rahman Khan
+Balance    : 5000
+
+Invalid Output:
+
+Error: Balance must be greater than 0
+
+Task 5 — Library Map System
+
+Classes Involved:
+
+Library
+
+LibraryRunner
+
+Library Class Fields:
+
+Map<String, String> books
+
+Responsibility:
+
+Bind key-value pairs
+
+Runner Class Responsibility:
+
+Display all books
+
+Output:
+
+---- Library Books ----
+java   : Effective Java
+spring : Spring in Action
+python : Learning Python
+
+Task 6 — Order Nested Object System
+
+Classes Involved:
+
+Order
+
+Customer
+
+OrderRunner
+
+Order Class Fields:
+
+orderId
+
+Customer customer
+
+Customer Class Fields:
+
+name
+
+address
+
+Responsibility:
+
+Bind nested configuration
+
+Runner Class Responsibility:
+
+Display order + customer details
+
+Output:
+
+---- Order Details ----
+Order ID : ORD101
+
+---- Customer Details ----
+Name     : Rohit
+Address  : Hyderabad
+
+Task 7 — College Student System
+
+Classes Involved:
+
+College
+
+Student
+
+CollegeRunner
+
+College Class Fields:
+
+List<Student> students
+
+Student Class Fields:
+
+id
+
+name
+
+marks
+
+Responsibility:
+
+Bind list of students
+
+Runner Class Responsibility:
+
+Display all students
+
+Output:
+
+---- Student List ----
+ID : 1 | Name : Rahman | Marks : 85
+ID : 2 | Name : Ali    | Marks : 78
+ID : 3 | Name : Sara   | Marks : 92
+

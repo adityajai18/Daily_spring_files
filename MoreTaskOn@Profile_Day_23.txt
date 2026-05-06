@@ -1,0 +1,273 @@
+Task 1: Payment Processing System with @Profile
+
+Step 1: Model Class
+
+Payment
+
+Fields:
+
+id
+amount
+method
+
+Step 2: Interface
+
+PaymentService
+
+Method:
+processPayment(Payment p)
+
+Step 3: Profile-Based Implementations
+
+Dev Profile (@Profile("dev"))
+Class: DummyPaymentService
+Logic:
+Prints → "Processing Dummy Payment of <amount>"
+
+Test Profile (@Profile("test"))
+
+Class: UpiPaymentService
+Logic:
+Prints → "Processing UPI Payment of <amount>"
+
+Prod Profile (@Profile("prod"))
+
+Class: CreditCardPaymentService
+Logic:
+Prints → "Processing Credit Card Payment of <amount>"
+Step 4: Runner
+Autowire PaymentService
+Create Payment object
+Call processPayment()
+
+Sample Input (Runner)
+id = 101
+amount = 5000
+method = "ONLINE"
+🔹 Output
+
+Dev Profile (dev)
+
+Processing Dummy Payment of 5000
+
+Test Profile (test)
+
+Processing UPI Payment of 5000
+
+Prod Profile (prod)
+
+Processing Credit Card Payment of 5000
+
+Task 2: Logging System with @Profile
+
+Step 1: Model Class
+
+LogMessage
+Fields:
+
+id
+message
+level
+
+Step 2: Interface
+
+LoggingService
+
+Method:
+
+log(LogMessage msg)
+
+Step 3: Profile-Based Implementations
+
+Dev Profile
+
+ConsoleLoggingService
+
+Prints → "Console Log: <message>"
+
+Test Profile
+FileLoggingService
+Prints → "Writing Log to File: <message>"
+
+Prod Profile
+
+DatabaseLoggingService
+Prints → "Saving Log to DB: <message>"
+Step 4: Runner
+Send one log message
+Output depends on profile
+
+Task 3: User Authentication System with @Profile
+Step 1: Model Class
+
+User
+Fields:
+
+username
+password
+Step 2: Interface
+
+AuthService
+Method:
+
+authenticate(User user)
+Step 3: Profile-Based Implementations
+
+Dev Profile
+
+DummyAuthService
+Always returns success
+
+Test Profile
+
+OTPAuthService
+Prints → "OTP sent to user"
+
+Prod Profile
+
+DatabaseAuthService
+Prints → "Validating user from DB"
+Step 4: Runner
+Pass user details
+Call authenticate()
+
+Task 4: File Storage System with @Profile
+Step 1: Model Class
+
+FileData
+Fields:
+
+fileName
+size
+Step 2: Interface
+
+StorageService
+Method:
+
+store(FileData file)
+Step 3: Profile-Based Implementations
+
+Dev Profile
+
+LocalStorageService
+Prints → "Storing file locally: <fileName>"
+
+Test Profile
+
+TempStorageService
+Prints → "Storing file in temp storage"
+
+Prod Profile
+
+CloudStorageService
+Prints → "Uploading file to cloud"
+Step 4: Runner
+Store one file
+
+Task 5: Email System with @Profile + Properties
+
+Step 1: Model Class
+
+Email
+Fields:
+
+to
+subject
+body
+Step 2: Interface
+
+EmailService
+
+Method:
+
+sendEmail(Email email)
+Step 3: application.properties
+
+email.dev.sender=dev@gmail.com
+email.test.sender=test@gmail.com
+email.prod.sender=prod@gmail.com
+
+Step 4: Profile Implementations
+
+Dev Profile
+
+Uses @Value("${email.dev.sender}")
+Prints → "Dev Email sent from <sender>"
+
+Test Profile
+
+Uses test sender
+
+Prod Profile
+
+Uses prod sender
+Step 5: Runner
+Send email
+
+Task 6: Order Delivery System with @Profile
+
+Step 1: Model Class
+
+Order
+Fields:
+
+id
+item
+address
+Step 2: Interface
+
+DeliveryService
+Method:
+
+deliver(Order order)
+Step 3: Profile-Based Implementations
+
+Dev Profile
+
+DummyDeliveryService
+Prints → "Simulating delivery"
+
+Test Profile
+
+CourierDeliveryService
+Prints → "Delivered via Courier"
+
+Prod Profile
+
+ExpressDeliveryService
+Prints → "Delivered via Express Service"
+Step 4: Runner
+Deliver one order
+
+Task 7: Report Generation System with @Profile
+Step 1: Model Class
+
+Report
+Fields:
+
+title
+type
+Step 2: Interface
+
+ReportService
+Method:
+
+generateReport(Report report)
+Step 3: Profile-Based Implementations
+
+Dev Profile
+
+PDFReportService
+Prints → "Generating PDF Report"
+
+Test Profile
+
+ExcelReportService
+Prints → "Generating Excel Report"
+
+Prod Profile
+
+AnalyticsReportService
+Prints → "Generating Advanced Analytics Report"
+Step 4: Runner
+Generate report

@@ -1,0 +1,86 @@
+
+Task 3 — Employee Project Management System
+============================================
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Enable Annotation Support -->
+    <context:annotation-config/>
+
+    <!-- Component Scan -->
+    <context:component-scan base-package="com.example.company"/>
+
+
+    <!-- ================= PROJECT ================= -->
+    <!-- Constructor Injection -->
+
+    <bean id="project1" class="com.example.company.Project">
+        <constructor-arg value="P101"/>
+        <constructor-arg value="Web Application"/>
+        <constructor-arg value="6 Months"/>
+    </bean>
+
+    <bean id="project2" class="com.example.company.Project">
+        <constructor-arg value="P102"/>
+        <constructor-arg value="Recruitment System"/>
+        <constructor-arg value="3 Months"/>
+    </bean>
+
+
+    <!-- ================= EMPLOYEE ================= -->
+  
+    <bean id="employee1" class="com.example.company.Employee">
+        <constructor-arg value="E101"/>
+        <constructor-arg value="Alice"/>
+    </bean>
+
+    <bean id="employee2" class="com.example.company.Employee">
+        <constructor-arg value="E102"/>
+        <constructor-arg value="Bob"/>
+    </bean>
+
+
+    <!-- ================= DEPARTMENT ================= -->
+    <!-- Constructor Injection with List -->
+
+    <bean id="itDepartment" class="com.example.company.Department">
+        <constructor-arg value="IT"/>
+        <constructor-arg>
+            <list>
+                <ref bean="employee1"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="hrDepartment" class="com.example.company.Department">
+        <constructor-arg value="HR"/>
+        <constructor-arg>
+            <list>
+                <ref bean="employee2"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+
+    <!-- ================= COMPANY ================= -->
+    <!-- Constructor Injection with Map -->
+
+    <bean id="company" class="com.example.company.Company">
+        <constructor-arg value="TechWave Solutions"/>
+
+        <constructor-arg>
+            <map>
+                <entry key="IT" value-ref="itDepartment"/>
+                <entry key="HR" value-ref="hrDepartment"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+</beans>

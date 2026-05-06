@@ -1,0 +1,72 @@
+Ques01: Employee CRUD (Spring Core + JDBC)
+
+Objective:
+Create a Layered App (Controller → Service → DAO) to perform CRUD on Employee.
+
+Table:
+employee(id, name, department, salary)
+
+Layers:
+
+Controller → user input/output
+Service → logic
+DAO → JDBC (DriverManager, PreparedStatement)
+
+Operations:
+
+Add
+Delete
+Get All
+
+Config:
+Use @Configuration + @Bean
+
+Rule:
+Spring Core only + Plain JDBC + proper layering
+
+
+Ques02: Product Price Config using @Value
+
+Objective:
+Load product details from properties.
+
+Properties:
+
+product.name
+product.price
+product.discount
+
+Class:
+
+ProductService
+
+Functionality:
+
+Inject values
+Calculate final price (price - discount)
+Display result
+
+Ques03:Library Books (List)
+
+Objective:
+Map book names using a List.
+
+Properties:
+
+library.name
+library.books[0]
+library.books[1]
+
+Class:
+
+LibraryConfig (@ConfigurationProperties(prefix="library"))
+
+Fields:
+
+name
+List<String> books
+
+Functionality:
+
+Bind list
+Display library and books

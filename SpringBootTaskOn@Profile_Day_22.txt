@@ -1,0 +1,83 @@
+Task 1: Notification System with @Profile
+Step 1: Create Model Class
+
+Notification
+
+Fields: id, message, recipient.
+
+Step 2: Define Interface
+
+NotificationService
+
+Method: sendNotification(Notification n).
+
+Step 3: Implement Profile-Specific Services
+
+Dev Profile
+
+EmailNotificationService (@Profile("dev"))
+
+Prints: "Sending Email to <recipient>: <message>".
+
+Test Profile
+
+SMSNotificationService (@Profile("test"))
+
+Prints: "Sending SMS to <recipient>: <message>".
+
+Prod Profile
+
+PushNotificationService (@Profile("prod"))
+
+Prints: "Sending Push Notification to <recipient>: <message>".
+
+Step 4: Runner
+
+Autowire NotificationService.
+
+Create one Notification and send it.
+
+Output depends on active profile.
+
+====================================================
+
+✅ Task 2: Vehicle System with @Profile
+Step 1: Create Model Class
+
+Vehicle
+
+Fields: id, name, type.
+
+Step 2: Define Interface
+
+VehicleService
+
+Method: getVehicles() returns list of vehicles.
+
+Step 3: Implement Profile-Specific Services
+
+Dev Profile
+
+BikeService (@Profile("dev"))
+
+Returns 2 bikes → e.g., Pulsar, Apache.
+
+Test Profile
+
+CarService (@Profile("test"))
+
+Returns 2 cars → e.g., Swift, Innova.
+
+Prod Profile
+
+TruckService (@Profile("prod"))
+
+Returns 2 trucks → e.g., Tata Truck, Ashok Leyland.
+
+Step 4: Runner
+
+Autowire VehicleService.
+
+Print the vehicles on startup.
+
+Output changes with profile.
